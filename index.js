@@ -4,6 +4,7 @@ import entriesRoutes from './routes/entries.js';
 
 const app = express();
 const PORT = 5000;
+
 app.use(bodyParser.json());
 
 app.use('/entries', entriesRoutes);
