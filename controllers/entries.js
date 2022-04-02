@@ -1,5 +1,11 @@
-import { v4 as uuid4 } from 'uuid';
-let entries = [];
+let entries = [
+  {
+    date: '14/11/2022',
+    hoursWorked: 7.5,
+    employeeId: 1,
+    jobGroup: 'A',
+  },
+];
 
 // get all entries
 export const getAllEntries = (req, res) => {
@@ -10,7 +16,7 @@ export const getAllEntries = (req, res) => {
 export const createEntry = (req, res) => {
   const entry = req.body;
 
-  entries.push({ ...entry, id: uuid4() });
+  entries.push({ ...entry });
 
   res.send(entries);
 };
