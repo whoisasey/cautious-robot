@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+  const [data, setData] = useState(null);
+
+  const getData = useCallback(async function () {
+    try {
+      const response = await fetch('/entries');
+      const json = await response.json();
+      if (!response.ok) {
+        throw new Error('There was an error processing your request');
+      }
+      setData(json);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
+  return <div className="App">{JSON.stringify(data)}</div>;
+};
 
 export default App;
