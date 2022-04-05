@@ -1,8 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import './App.css';
+import { createUseStyles } from 'react-jss';
+const useStyles = createUseStyles({
+  App: {
+    textAlign: 'center',
+  },
+});
 
 const App = () => {
   const [data, setData] = useState(null);
+  const classes = useStyles();
 
   const getData = useCallback(async function () {
     try {
@@ -20,7 +26,17 @@ const App = () => {
   useEffect(() => {
     getData();
   }, [getData]);
-  return <div className="App">{JSON.stringify(data)}</div>;
+  return (
+    <div className={classes.App}>
+      <h2>Input Employee Hours</h2>
+      <form action="">
+        <input type="text" placeholder="Employee Id" value="" />
+        <input type="text" placeholder="Date Worked" value="" />
+        <input type="text" placeholder="Hours Worked" value="" />
+      </form>
+      {JSON.stringify(data)}
+    </div>
+  );
 };
 
 export default App;
